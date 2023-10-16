@@ -16,6 +16,10 @@ inputs:
     description: "The application import map path."
     required: false
     default: "import_map.json"
+  build_cmd:
+    description: "The build cmd that should be used."
+    required: false
+    default: "deno run -A dev.ts build"
 runs:
   using: "composite"
   steps:
@@ -29,7 +33,7 @@ runs:
 
     - name: Build step
       shell: bash
-      run: "deno task build" # 📝 Update the build command(s) if necessary
+      run: ${{ inputs.build_cmd }} # 📝 Update the build command(s) if necessary
 
     - name: Upload to Deno Deploy
       uses: denoland/deployctl@v1
