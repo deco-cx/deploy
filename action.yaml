@@ -8,10 +8,6 @@ inputs:
     description: "The application entrypoint, defaults to main.ts"
     required: false
     default: "./main.ts"
-  project:
-    description: "The project name"
-    required: false
-    default: ${{ github.event.repository.name }}
   import_map:
     description: "The application import map path."
     required: false
@@ -38,6 +34,6 @@ runs:
     - name: Upload to Deno Deploy
       uses: denoland/deployctl@v1
       with:
-        project: "deco-sites-${{ inputs.project }}" # 📝 Update the deploy project name if necessary
+        project: "deco-sites-${{ github.event.repository.name }}" # 📝 Update the deploy project name if necessary
         entrypoint: ${{ inputs.entrypoint }} # 📝 Update the entrypoint if necessary
         import-map: ${{ inputs.import_map }}
