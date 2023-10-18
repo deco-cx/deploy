@@ -8,10 +8,6 @@ inputs:
     description: "The application entrypoint, defaults to main.ts"
     required: false
     default: "./main.ts"
-  import_map:
-    description: "The application import map path."
-    required: false
-    default: "import_map.json"
   build_cmd:
     description: "The build cmd that should be used."
     required: false
@@ -36,4 +32,3 @@ runs:
       with:
         project: "deco-sites-${{ github.event.repository.name }}" # 📝 Update the deploy project name if necessary
         entrypoint: ${{ inputs.entrypoint }} # 📝 Update the entrypoint if necessary
-        import-map: ${{ inputs.import_map }}
