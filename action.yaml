@@ -12,6 +12,10 @@ inputs:
     description: "The site name"
     required: false
     default: ${{ github.event.repository.name }}
+  skip_build:
+    description: "If build should be skipped"
+    required: false
+    default: "false"
   build_cmd:
     description: "The build cmd that should be used."
     required: false
@@ -33,11 +37,12 @@ runs:
 
     - name: Build step
       shell: bash
-      run: ${{ inputs.build_cmd }} # 📝 Update the build command(s) if necessary
+      if: ${{ inputs.skip_build == 'false' }}
+      run: ${{ inputs.build_cmd }}
 
     - name: Upload to Deno Deploy
       uses: denoland/deployctl@v1
       with:
-        project: "deco-sites-${{ inputs.site }}" # 📝 Update the deploy project name if necessary
-        entrypoint: ${{ inputs.entrypoint }} # 📝 Update the entrypoint if necessary
+        project: "deco-sites-${{ inputs.site }}"
+        entrypoint: ${{ inputs.entrypoint }}
         exclude: ${{ inputs.exclude }}
