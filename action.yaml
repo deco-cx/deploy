@@ -43,9 +43,12 @@ runs:
     - name: Clean unnecessary files # this is only necessary because deployctl does not have an option to exclude directories https://github.com/denoland/deployctl/issues/181
       shell: bash
       run: |
-        ls -la
         rm -rf node_modules
         rm -rf .git
+        rm -rf .gitattributes
+        rm -rf CHANGELOG.md
+        rm -rf README.md
+        rm -rf .vscode
 
     - name: Upload to Deno Deploy
       uses: denoland/deployctl@v1
