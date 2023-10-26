@@ -16,6 +16,10 @@ inputs:
     description: "The build cmd that should be used."
     required: false
     default: "deno run -A dev.ts build"
+  exclude:
+    description: "Folders/files to exclude for deploying"
+    required: false
+    default: "node_modules"
 runs:
   using: "composite"
   steps:
@@ -36,3 +40,4 @@ runs:
       with:
         project: "deco-sites-${{ inputs.site }}" # 📝 Update the deploy project name if necessary
         entrypoint: ${{ inputs.entrypoint }} # 📝 Update the entrypoint if necessary
+        exclude: ${{ inputs.exclude }}
