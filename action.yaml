@@ -40,6 +40,13 @@ runs:
       if: ${{ inputs.skip_build == 'false' }}
       run: ${{ inputs.build_cmd }}
 
+    - name: Clean unnecessary files # this is only necessary because deployctl does not have an option to exclude directories https://github.com/denoland/deployctl/issues/181
+      shell: bash
+      run: |
+        ls -la
+        rm -rf node_modules
+        rm -rf .git
+
     - name: Upload to Deno Deploy
       uses: denoland/deployctl@v1
       with:
