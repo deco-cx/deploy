@@ -36,12 +36,12 @@ runs:
         deno-version: v1.x
 
     - uses: actions/cache@v3
-      if: ${{ inputs.skip_build == 'false' && hashFiles('deno.lock') != '' }}
+      if: ${{ inputs.skip_build == 'false' }}
       with:
         path: |
           ~/.deno
           ~/.cache/deno
-        key: ${{ runner.os }}-deno-${{ hashFiles('deno.lock') }}
+        key: ${{ runner.os }}-deno-${{ hashFiles('deno.lock', '**/deps.ts', 'deno.json', 'import_map.json') }}
 
     - name: Build step
       shell: bash
