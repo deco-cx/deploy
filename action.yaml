@@ -33,7 +33,7 @@ runs:
     - name: Install Deno
       uses: denoland/setup-deno@v1
       with:
-        deno-version: v1.x
+        deno-version: v1.39.4 # FIXME put this back when experimental decorators is being used v1.x
 
     - uses: actions/cache@v3
       if: ${{ inputs.skip_build == 'false' }}
