@@ -24,6 +24,10 @@ inputs:
     description: "Folders/files to exclude for deploying"
     required: false
     default: "node_modules"
+  deno_version:
+    description: "The version of Deno to install"
+    required: false
+    default: "v1.x"
 runs:
   using: "composite"
   steps:
@@ -33,7 +37,7 @@ runs:
     - name: Install Deno
       uses: denoland/setup-deno@v1
       with:
-        deno-version: v1.x
+        deno-version: ${{ inputs.deno_version }}
 
     - uses: actions/cache@v3
       if: ${{ inputs.skip_build == 'false' }}
