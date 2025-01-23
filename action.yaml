@@ -28,11 +28,16 @@ inputs:
     description: "The version of Deno to install"
     required: false
     default: "v1.x"
+  checkout:
+    description: "When true the repository clone will be done by the action. default: true"
+    required: false
+    default: "true"
 runs:
   using: "composite"
   steps:
     - name: Clone repository
       uses: actions/checkout@v3
+      if: ${{ inputs.checkout == 'true' }}
 
     - name: Install Deno
       uses: denoland/setup-deno@v1
